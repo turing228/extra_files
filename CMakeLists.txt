@@ -10,3 +10,6 @@ find_package(Qt5Widgets REQUIRED)
 
 add_executable(dirdemo main.cpp mainwindow.h mainwindow.cpp)
 qt5_use_modules(dirdemo Widgets)
+
+add_subdirectory(back)
+include_directories(back)
