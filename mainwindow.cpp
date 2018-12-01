@@ -34,7 +34,7 @@ main_window::main_window(QWidget *parent)
     connect(ui->actionExit, &QAction::triggered, this, &QWidget::close);
     connect(ui->actionAbout, &QAction::triggered, this, &main_window::show_about_dialog);
 
-    scan_directory(QDir::homePath());
+    //scan_directory(QDir::homePath());
 }
 
 main_window::~main_window() {}
@@ -69,6 +69,7 @@ void main_window::scan_directory(QString const &dir) {
             item->setText(4, QString::number(file_info.size()));
             ui->treeWidget->addTopLevelItem(item);
         }
+        //ui->progressBar->setValue(100);
     }
 }
 
