@@ -131,7 +131,7 @@ void clustering::cluster_big_size(size_t cluster_number) {
     } else {
         std::vector<std::pair<QByteArray, int>> files;
 
-        QCryptographicHash hash(QCryptographicHash::Sha256);
+        QCryptographicHash hash(QCryptographicHash::Sha3_256);
         for (size_t i = 0; i < local_list.length(); ++i) {
             QFile file(local_list.at(i).absoluteFilePath());
             if (!file.open(QIODevice::ReadOnly)) {
