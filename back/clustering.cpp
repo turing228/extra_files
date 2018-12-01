@@ -5,6 +5,7 @@
 #include <headers/clustering.h>
 #include <fstream>
 #include <QtCore/QCryptographicHash>
+#include <unordered_map>
 
 bool by_size(QFileInfo &a, QFileInfo &b) {
     return a.size() < b.size();
@@ -49,40 +50,32 @@ void clustering::cluster_small_size(size_t cluster_number) {
         } else {
             files.emplace_back(i, file.readAll());
         }
-        file.close();
+        //file.close();
     }
 
     int files_size = files.size();
 
-    int blob_size = 0;
-    if (files_size > 0) {
-        blob_size = files[0].second.size();
-    }
-
     for (size_t i = 0; i < files_size - 1; ++i) {
-        if (!used[i]) {
-            QFileInfoList local_cluster;
-            local_cluster.push_back(local_list[files[i].first]);
-            used[i] = true;
+        if (used[i])
+            continue;
 
-            for (size_t j = i + 1; j < files_size; ++j) {
+        QFileInfoList local_cluster;
+        local_cluster.push_back(local_list[files[i].first]);
+        used[i] = true;
 
-                if (!used[j]) {
-                    bool is_same = true;
-                    for (int h = 0; h < blob_size; ++h) {
-                        if (files[i].second[h] != files[j].second[h]) {
-                            is_same = false;
-                            break;
-                        }
-                    }
-                    if (is_same) {
-                        local_cluster.push_back(local_list[files[j].first]);
-                        used[j] = true;
-                    }
-                }
+        for (size_t j = i + 1; j < files_size; ++j) {
+            if (used[j])
+                continue;
+
+            bool is_same = std::equal(files[i].second.begin(), files[i].second.end(), files[j].second.begin(),
+                                      files[j].second.end());
+            if (is_same) {
+                local_cluster.push_back(local_list[files[j].first]);
+                used[j] = true;
             }
-            clusters.push_back(local_cluster);
         }
+
+        clusters.push_back(local_cluster);
     }
 
     /*
@@ -127,26 +120,50 @@ void clustering::cluster_big_size(size_t cluster_number) {
     QFileInfoList local_list = clusters_by_size[cluster_number];
 
     if (local_list.length() == 1) {
-        clusters.push_back(local_list);
+        QFile file(local_list[0].absoluteFilePath());
+        if (!file.open(QIODevice::ReadOnly)) {
+            bad_files.push_back(local_list[0]);
+        } else {
+            clusters.push_back(local_list);
+        }
     } else {
-        std::vector<std::pair<QByteArray, int>> files;
+        //std::vector<std::pair<QByteArray, int>> files;
+
+        //std::unordered_multimap<QCryptographicHash, int> files_map;
+
+        std::unordered_multimap<QByteArray, int> files_map;
 
         QCryptographicHash hash(QCryptographicHash::Sha3_256);
         for (size_t i = 0; i < local_list.length(); ++i) {
-            QFile file(local_list.at(i).absoluteFilePath());
+            QFile file(local_list[i].absoluteFilePath());
             if (!file.open(QIODevice::ReadOnly)) {
                 bad_files.push_back(local_list[i]);
             } else {
                 hash.reset();
                 hash.addData(&file);
-                files.emplace_back(hash.result(), i);
+                //files.emplace_back(hash.result(), i);
+                files_map.emplace(hash.result(), i);
             }
-            file.close();
+            //file.close();
         }
 
-        sort(files.begin(), files.end());
+        //sort(files.begin(), files.end());
 
-        int n = 0;
+
+
+        auto it = files_map.begin();
+
+        while (it != files_map.end()) {
+            auto range = files_map.equal_range(it->first);
+            QFileInfoList new_list;
+            for (auto i = range.first; i != range.second; ++i) {
+                new_list.push_back(local_list.at(i->second));
+            }
+            it = range.second;
+            clusters.push_back(new_list);
+        }
+    }
+/*        int n = 0;
         int clust_size = 1;
         while (n < files.size()) {
             QFileInfoList new_list;
@@ -159,8 +176,7 @@ void clustering::cluster_big_size(size_t cluster_number) {
             clust_size = 1;
             clusters.push_back(new_list);
         }
-    }
-    int x = 10;
+    }*/
 
     /*
     std::vector<FILE *> files;
@@ -275,7 +291,8 @@ void clustering::cluster_by_size(QFileInfoList &list) {
 
 QFileInfoList clustering::listFiles(QDir directory) {
     QDir dir(directory);
-    QFileInfoList list = dir.entryInfoList(QDir::Files | QDir::Dirs | QDir::NoDotAndDotDot);
+    QFileInfoList list = dir.entryInfoList(
+            QDir::Files | QDir::Dirs | QDir::NoDotAndDotDot | QDir::Hidden); //| QDir::NoDotAndDotDot
     QFileInfoList result;
 
     for (QFileInfo file_info : list) {
@@ -321,4 +338,8 @@ QFileInfoList clustering::getSortedList() {
 
 int clustering::getSize() {
     return clusters.size();
+}
+
+QFileInfoList clustering::getBad() {
+    return bad_files;
 }
