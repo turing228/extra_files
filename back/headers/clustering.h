@@ -11,37 +11,54 @@
 #include <vector>
 #include <algorithm>
 #include <headers/consts.h>
+#include <QtCore/QCryptographicHash>
+#include <mutex>
 
 class clustering {
-private:
-    std::vector<QFileInfoList> clusters;
-    std::vector<QFileInfoList> clusters_by_size;
+public:
+    std::vector<std::vector<QFileInfo *>> clusters;
     QFileInfoList list;
     QFileInfoList bad_files;
 
     QFileInfoList listFiles(QDir directory);
 
-    void fill_vector_files();
-
     void cluster_by_size(QFileInfoList &list);
 
-    void cluster_inside_sizes();
+    int64_t filesSize = 0;
 
-    void cluster_small_size(size_t cluster_number);
-
-    void cluster_big_size(size_t cluster_number);
+    int cur_id = -1;
 
 public:
+    std::vector<std::vector<QFileInfo *>> clusters_by_size;
+
     void cluster(QString const &dir);
 
-    QFileInfoList getList(size_t i);
-
-    QFileInfoList getList();
-
-    QFileInfoList getSortedList();
+    QFileInfoList getBad();
 
     int getSize();
+
+    int64_t getFilesSize();
+
+    void cluster_sizes(QString const &dir);
+
+    int push(std::vector<QFileInfo *> &list);
 };
+
+
+template<>
+struct std::hash<QByteArray> {
+    size_t operator()(const QByteArray &x) const {
+        size_t seed = 0;
+        for (auto i : x)
+            seed ^= i;
+        //for (char c : x) // TODO: or char
+        //    seed ^= c;
+        return seed;
+    }
+};
+
+extern clustering clusters;
+extern std::mutex mtx;
 
 
 #endif //DIRDEMO_CLUSTERING_H

@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 2.8)
+cmake_minimum_required(VERSION 3.1)
 
 project(dirdemo)
 
@@ -8,7 +8,7 @@ set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
 find_package(Qt5Widgets REQUIRED)
 
-add_executable(dirdemo main.cpp mainwindow.h mainwindow.cpp)
+add_executable(dirdemo main.cpp mainwindow.h mainwindow.cpp back/headers/clusterWorker.h back/clusterWorker.cpp)
 qt5_use_modules(dirdemo Widgets)
 
 add_subdirectory(back)
