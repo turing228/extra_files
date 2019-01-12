@@ -101,7 +101,7 @@
            <number>7</number>
           </property>
           <attribute name="headerMinimumSectionSize">
-           <number>60</number>
+           <number>40</number>
           </attribute>
           <attribute name="headerStretchLastSection">
            <bool>false</bool>
@@ -195,7 +195,7 @@
            <number>4</number>
           </property>
           <attribute name="headerMinimumSectionSize">
-           <number>20</number>
+           <number>40</number>
           </attribute>
           <attribute name="headerStretchLastSection">
            <bool>false</bool>

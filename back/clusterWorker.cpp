@@ -2,12 +2,12 @@
 // Created by jesus on 15.12.18.
 //
 
-#include <headers/clustering.h>
+#include <back/headers/clustering.h>
 #include "headers/clusterWorker.h"
 #include <unordered_map>
 #include <algorithm>
 #include <assert.h>
-#include <headers/clusterWorker.h>
+#include <back/headers/clusterWorker.h>
 
 
 size_t lastCluster;
@@ -42,13 +42,13 @@ void ClusterWorker::process() {
 
     size_t i = lastCluster;
     if (i < clusters.clusters_by_size.size()) {
-        //cluster_big_size(i);
+        cluster_big_size(i);
 
-        if (clusters.clusters_by_size[i][0]->size() <= __BLOCK_SIZE && clusters.clusters_by_size[i].size() < 1000) {
-            cluster_small_size(i);
-        } else {
-            cluster_big_size(i);
-        }
+//        if (clusters.clusters_by_size[i][0]->size() <= __BLOCK_SIZE && clusters.clusters_by_size[i].size() < 1000) {
+//            cluster_small_size(i);
+//        } else {
+//            cluster_big_size(i);
+//        }
 
         lastCluster++;
 
@@ -125,7 +125,7 @@ void ClusterWorker::cluster_big_size(size_t cluster_number) {
             QFile file(local_list[i]->absoluteFilePath());
             if (!file.open(QIODevice::ReadOnly)) {
                 clusters.bad_files.push_back(*local_list[i]);
-                test_files_map_size_eq_to_list_size++;
+                //test_files_map_size_eq_to_list_size++;
             } else {
                 hash.reset();
                 hash.addData(&file);
@@ -133,7 +133,7 @@ void ClusterWorker::cluster_big_size(size_t cluster_number) {
                 test_files_map_size_eq_to_list_size++;
             }
         }
-        assert(files_map.size() == test_files_map_size_eq_to_list_size);
+        //assert(files_map.size() == test_files_map_size_eq_to_list_size);
 
         auto it = files_map.begin();
 
@@ -149,8 +149,10 @@ void ClusterWorker::cluster_big_size(size_t cluster_number) {
 
             }
             it = range.second;
+
+            //if (new_list.size() > 1)
             emit clusterEnded(clusters.push(new_list));
         }
-        assert(files_map.size() == test_files_map_size);
+        //assert(files_map.size() == test_files_map_size);
     }
 }

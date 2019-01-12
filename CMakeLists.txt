@@ -8,8 +8,10 @@ set(CMAKE_INCLUDE_CURRENT_DIR ON)
 
 find_package(Qt5Widgets REQUIRED)
 
-add_executable(dirdemo main.cpp mainwindow.h mainwindow.cpp back/headers/clusterWorker.h back/clusterWorker.cpp)
+add_executable(dirdemo main.cpp mainwindow.h mainwindow.cpp deletedialog.h deletedialog.cpp back/headers/clusterWorker.h back/clusterWorker.cpp)
 qt5_use_modules(dirdemo Widgets)
 
 add_subdirectory(back)
 include_directories(back)
+
+add_subdirectory(test)

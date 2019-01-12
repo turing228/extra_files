@@ -6,7 +6,7 @@
 #define DIRDEMO_CLUSTERWORKER_H
 
 #include <QThread>
-#include <headers/clustering.h>
+#include <back/headers/clustering.h>
 #include <mutex>
 #include <QtCore/QObject>
 

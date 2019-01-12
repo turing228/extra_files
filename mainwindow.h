@@ -60,7 +60,13 @@ private slots:
 
     void pushButton_runstop_clicked();
 
+    void pushButton_selectall_clicked();
+
+    void pushButton_delete_clicked();
+
     void change_selected_file(QTreeWidgetItem *, QTreeWidgetItem *);
+
+    void change_selected_file(QTreeWidgetItem *, int);
 
     void pushButton_openpath_clicked();
 
@@ -74,6 +80,19 @@ private slots:
     //void startTimer();
     //void stopTimer();
 
+    void buttons_start();
+
+    //void buttons_selected();
+    void buttons_running();
+
+    void buttons_paused();
+
+    void buttons_ended();
+
+    void buttons_selected_cluster();
+
+    void buttons_selected_files();
+
 private:
     //void timerEvent(QTimerEvent *);
     bool running_scanning_time = false;
@@ -86,6 +105,8 @@ private:
     QScopedPointer<ClusterWorker> scoped_pointer_to_ClusterObject;
     QThread *thread;
     ClusterWorker *clusterWorker;
+
+    void scan(QString dir);
 
 signals:
 

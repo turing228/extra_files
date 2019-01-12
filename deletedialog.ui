@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <ui version="4.0">
-    <class>Dialog</class>
-    <widget class="QDialog" name="Dialog">
+    <class>DeleteDialog</class>
+    <widget class="QDialog" name="DeleteDialog">
         <property name="geometry">
             <rect>
                 <x>0</x>
                 <y>0</y>
-                <width>331</width>
-                <height>133</height>
+                <width>354</width>
+                <height>154</height>
             </rect>
         </property>
         <property name="windowTitle">
@@ -45,7 +45,7 @@
                         <enum>Qt::Horizontal</enum>
                     </property>
                     <property name="standardButtons">
-                        <set>QDialogButtonBox::Cancel|QDialogButtonBox::Ok</set>
+                        <set>QDialogButtonBox::Cancel|QDialogButtonBox::Yes</set>
                     </property>
                     <property name="centerButtons">
                         <bool>true</bool>
@@ -59,7 +59,7 @@
         <connection>
             <sender>buttonBox</sender>
             <signal>accepted()</signal>
-            <receiver>Dialog</receiver>
+            <receiver>DeleteDialog</receiver>
             <slot>accept()</slot>
             <hints>
                 <hint type="sourcelabel">
@@ -75,7 +75,7 @@
         <connection>
             <sender>buttonBox</sender>
             <signal>rejected()</signal>
-            <receiver>Dialog</receiver>
+            <receiver>DeleteDialog</receiver>
             <slot>reject()</slot>
             <hints>
                 <hint type="sourcelabel">

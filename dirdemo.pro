@@ -25,12 +25,19 @@ DEFINES += QT_DEPRECATED_WARNINGS
 
 SOURCES += \
         main.cpp \
-        mainwindow.cpp
+        mainwindow.cpp \
+    deletedialog.cpp \
+    back/clustering.cpp \
+    back/clusterWorker.cpp \
 
 HEADERS += \
-        mainwindow.h
+        mainwindow.h \
+    deletedialog.h \
+    back/headers/clustering.h \
+    back/headers/clusterWorker.h \
+    back/headers/consts.h
 
 FORMS += \
         mainwindow.ui \
-    dialog.ui
+    deletedialog.ui
 
