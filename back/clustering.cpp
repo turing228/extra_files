@@ -49,8 +49,9 @@ void clustering::cluster_by_size(QFileInfoList &list) {
             n++;
         }
         cluster_begin = n;
+        // TODO: We check on equality only similar size. It means interesting files should have analogues with the same size.
+        //  So, we save only them and forget about all others.
         if (list_of_same_size.size() > 1) {
-            // TODO: как пометка здесь. Здесь мы говорим, что оставляем только одинаковые по размеру. Мол цель программы обрабатывать *похожие* файлы, а не все
             filesSize += sizes;
             clusters_by_size.push_back(list_of_same_size);
         }

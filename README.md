@@ -5,8 +5,11 @@ EXTRA files finder is the application of the future that allows you to find all 
 
 ### Instruction of the using
 
+**Important** if you want to be able to delete files, then uncomment the line 462 at `mainwindow.cpp`
 
+    $ //QFile(item->text(2)).remove();                // TODO: IS OFF TO DON'T DELETE SOMETHING IMPORTANT
 
+**Important** app shows all interesting files that have analogues of the same size. It means sometimes it shows you files with **NO COPIES**. It's lifehack and I'm sure app should work so.
 
 ### I already want to run it. How to do this?
 
@@ -21,19 +24,19 @@ You are also free to write if you want, for example, `-DCMAKE_BUILD_TYPE=RelWith
 
 QMake-way building:
 
-    $ qmake CONFIG+=debug -o Makefile dirdemo.pro
+    $ qmake CONFIG+=debug -o Makefile extra_files_finder.pro
     $ make
 
 To run it just write in terminal:
 
-    $ ./dirdemo
+    $ ./extra_files_finder
 
 ### Used tecnhologies
 
 - QT framework - for UI application and multi-threading
 - C++ - as the language for a backend development
 
-### Idea of solution. What is behind code symbols?
+### Idea of the solution. What is behind code symbols?
 
 Ok, that is very easy to describe:
 
@@ -51,4 +54,4 @@ Code of the application:
 Also:
  - `mainwindow.ui` — XML-file with the description of the main window. Utility `uic` uses it for the building of the file `ui-mainwindow.h`, which includes to `mainwindow.cpp`. `ui`-files can be opened by QT Designer or QT Creator.
  - `CMakeLists.txt` — `cmake`'s build-scrypt.
- - `dirdemo.pro` — `qmake`'s build-scrypt.
+ - `extra_files_finder.pro` — `qmake`'s build-scrypt.

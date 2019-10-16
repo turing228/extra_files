@@ -2,8 +2,8 @@
 // Created by jesus on 15.12.18.
 //
 
-#ifndef DIRDEMO_CLUSTERWORKER_H
-#define DIRDEMO_CLUSTERWORKER_H
+#ifndef EXTRA_FILES_FINDER_CLUSTERWORKER_H
+#define EXTRA_FILES_FINDER_CLUSTERWORKER_H
 
 #include <QThread>
 #include <headers/clustering.h>
@@ -13,7 +13,7 @@
 class ClusterWorker : public QObject {
 Q_OBJECT
 public:
-    explicit ClusterWorker(QObject *parent = 0);
+    explicit ClusterWorker(QObject *parent = nullptr);
     //ClusterWorker();
 
     //virtual ~ClusterWorker();
@@ -45,9 +45,9 @@ private:
     void cluster_big_size(size_t cluster_number);
 
     size_t lastCluster;
-    volatile bool running, stopped;
+    volatile bool stopped, running;
 };
 
 extern int cur_id;
 
-#endif //DIRDEMO_CLUSTERWORKER_H
+#endif //EXTRA_FILES_FINDER_CLUSTERWORKER_H

@@ -2,8 +2,8 @@
 // Created by jesus on 01.12.18.
 //
 
-#ifndef DIRDEMO_CLUSTERING_H
-#define DIRDEMO_CLUSTERING_H
+#ifndef EXTRA_FILES_FINDER_CLUSTERING_H
+#define EXTRA_FILES_FINDER_CLUSTERING_H
 
 #include <QtCore/QFileInfoList>
 #include <qt5/QtCore/QFileInfo>
@@ -51,8 +51,6 @@ struct std::hash<QByteArray> {
         size_t seed = 0;
         for (auto i : x)
             seed ^= i;
-        //for (char c : x) // TODO: or char
-        //    seed ^= c;
         return seed;
     }
 };
@@ -61,4 +59,4 @@ extern clustering clusters;
 extern std::mutex mtx;
 
 
-#endif //DIRDEMO_CLUSTERING_H
+#endif //EXTRA_FILES_FINDER_CLUSTERING_H

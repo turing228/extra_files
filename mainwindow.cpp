@@ -459,7 +459,7 @@ void main_window::pushButton_delete_clicked() {
             QTreeWidgetItem *item = ui->treeWidget_cluster->topLevelItem(i);
 
             if (item->checkState(0) == Qt::Checked) {
-                //QFile(item->text(2)).remove();                                      // TODO: пока что выключили, чтобы не дай бог удалить что-то важное!!!
+                //QFile(item->text(2)).remove();                // TODO: IS OFF TO DON'T DELETE SOMETHING IMPORTANT
                 item->setHidden(true);
                 count_deleted++;
             }

@@ -6,7 +6,7 @@
 #include "headers/clusterWorker.h"
 #include <unordered_map>
 #include <algorithm>
-#include <assert.h>
+#include <cassert>
 #include <headers/clusterWorker.h>
 
 
@@ -78,7 +78,7 @@ void ClusterWorker::cluster_small_size(size_t cluster_number) {
         }
     }
 
-    int files_size = files.size();
+    size_t files_size = files.size();
 
     for (size_t i = 0; i < files_size; ++i) {
         if (used[i])
