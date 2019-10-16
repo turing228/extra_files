@@ -14,4 +14,4 @@ qt5_use_modules(dirdemo Widgets)
 add_subdirectory(back)
 include_directories(back)
 
-add_subdirectory(test)
+#add_subdirectory(test)

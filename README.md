@@ -1,25 +1,54 @@
-dirdemo — небольшая демка получения списка файлов на Qt
+EXTRA files finder
 -------------------------------------------------------
 
-### Описание файлов
+EXTRA files finder is the application of the future that allows you to find all files duplicates and delete unnecessary copies!
 
-Исходный код расположен в файлах
- - `main.cpp`— файл с функцией `main`
- - `mainwindow.h`, `mainwindow.cpp` — код главного окна приложения
- 
- Кроме исходного кода есть
- - `mainwindow.ui` — XML-файл с описанием главного окна. В процессе сборки на его основе утилитой `uic` будет сгенерён файл `ui_mainwindow.h`, который включается в `mainwindow.cpp`. `ui`-файлы можно открыть Qt Designer'ом. Qt Creator имеет Qt Designer встроенный в себя и тоже умеет открывать `ui`-файлы.
- - `CMakeLists.txt` — билд-скрипт для `cmake`.  Не используется при билде `qmake`'ом.
- - `dirdemo.pro` — файл-проект для `qmake`. Не используется при билде `cmake`'ом.
+### Instruction of the using
 
-### Сборка `cmake`'ом
+
+
+
+### I already want to run it. How to do this?
+
+You have two options:
+
+CMake-way building:
 
     $ cmake -DCMAKE_BUILD_TYPE=Debug .
     $ make
+    
+You are also free to write if you want, for example, `-DCMAKE_BUILD_TYPE=RelWithDebInfo` instead of `-DCMAKE_BUILD_TYPE=Debug`
 
-Вместо `-DCMAKE_BUILD_TYPE=Debug` может быть `-DCMAKE_BUILD_TYPE=RelWithDebInfo` или что-то другое в зависимости от того, какую конфигурацию вы желаете.
-
-### Сборка qmake'ом
+QMake-way building:
 
     $ qmake CONFIG+=debug -o Makefile dirdemo.pro
     $ make
+
+To run it just write in terminal:
+
+    $ ./dirdemo
+
+### Used tecnhologies
+
+- QT framework - for UI application and multi-threading
+- C++ - as the language for a backend development
+
+### Idea of solution. What is behind code symbols?
+
+Ok, that is very easy to describe:
+
+1. We cluster files by their sizes by the method `clustering::cluster_by_size`
+2. Compare files of the same size by their hashes Sha3_256
+
+### Files description
+
+Code of the application:
+ - `main.cpp` - file with function `main`
+ - `mainwindow.h`, `mainwindow.cpp` - the code of the main application
+ - `clustering.cpp`, `clustering.h` - for the first step in our idea
+ - `clusterWorker.cpp`, `clusterWorker.h` - for the second step. It starts in an extra thread by `mainwindow.cpp` to don't disturb UI-thread
+ 
+Also:
+ - `mainwindow.ui` — XML-file with the description of the main window. Utility `uic` uses it for the building of the file `ui-mainwindow.h`, which includes to `mainwindow.cpp`. `ui`-files can be opened by QT Designer or QT Creator.
+ - `CMakeLists.txt` — `cmake`'s build-scrypt.
+ - `dirdemo.pro` — `qmake`'s build-scrypt.

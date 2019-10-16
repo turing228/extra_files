@@ -2,12 +2,12 @@
 // Created by jesus on 15.12.18.
 //
 
-#include <back/headers/clustering.h>
+#include <headers/clustering.h>
 #include "headers/clusterWorker.h"
 #include <unordered_map>
 #include <algorithm>
 #include <assert.h>
-#include <back/headers/clusterWorker.h>
+#include <headers/clusterWorker.h>
 
 
 size_t lastCluster;
