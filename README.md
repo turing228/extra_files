@@ -36,13 +36,13 @@ EXTRA files finder is the application of the future that allows you to find all 
 2. Select it and click "choose".That will be the directory for finding duplicated files.
 <img src="/examples/Choose%20directory.png" width="500" title="Choose directory">
 
-3. After fast scanning for getting all files-paths and clusterizing them by sizes, you can see in the real-time the result of the application work process. You can choose clusters at the left half of the screen or click "Stop" to temporary stop work process. **Notice** that you can see the progress bars and timings at the bottom of the application!
+3. After fast scanning for getting all files-paths and clustering them by sizes, you can see in the real-time the result of the application work process. You can choose clusters at the left half of the screen or click "Stop" to temporarily stop the work process. **Notice** that you can see the progress bars and timings at the bottom of the application!
 <img src="/examples/Run%20mode.png" width="500" title="Run mode">
 
-4. You can double-click on cluster at the left side to open it and look at the right side files of that cluster. Now you can select some of them and delete (* check **important**) or open path/open file
+4. You can double-click on a cluster at the left side to open it and look at the right side files of that cluster. Now you can select some of them and delete (* check **important**) or open path/open file
 <img src="/examples/Stop%20mode%20Select%20and%20delete.png" width="800" title="Stop mode">
 
-5. Different sort modes are available. You can click on column header to sort clusters by values there. "##" means amount of copies at this cluster, "Mem" means the one file's size of this cluster and "Extra" means how much can you free, if you delete all copies except one (that is (count_files - 1) * one_file_size).
+5. Different sort modes are available. You can click on column header to sort clusters by values there. "##" means the amount of copies at this cluster, "Mem" means the one file's size of this cluster and "Extra" means how much can you free if you delete all copies except one (that is (count_files - 1) * one_file_size).
 <img src="/examples/Different%20sort%20modes.png" width="800" title="Different sort modes">
 
 6. You can open path or even file if you want just by clicking the proper button!
@@ -52,7 +52,7 @@ EXTRA files finder is the application of the future that allows you to find all 
 
     $ //QFile(item->text(2)).remove();                // TODO: IS OFF TO DON'T DELETE SOMETHING IMPORTANT
 
-**Important** app shows all interesting files that have analogues of the same size. It means sometimes it shows you files with **NO COPIES**. It's lifehack and I'm sure app should work so.
+**Important** app shows all interesting files that have analogs of the same size. It means sometimes it shows you files with **NO COPIES**. It's lifehack and I'm sure app should work so.
 
 ## 🚀 Quickstart
 
@@ -74,7 +74,7 @@ To run it just write in your terminal:
 
     $ ./extra_files_finder
 
-## 📋 Used tecnhologies
+## 📋 Used technologies
 
 - QT framework - for UI application and multi-threading
 - C++ - as the language for a backend development
